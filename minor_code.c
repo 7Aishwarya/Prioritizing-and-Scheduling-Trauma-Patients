@@ -52,16 +52,19 @@ void ward_allotment(int queue_array[MAX])
 {   
     int q[50];
     int i,n, ward_no[4];
+    label:
     printf("\n");
     printf("Number of wards empty: ");    //we assume we have 4 wards only
     scanf("%d",&n);
     if(n!=0)
-    printf("Enter the ward number of %d ward/wards which is/are empty(Ward 0,1,2,3):\n",n); // ward 1,2,3 or 4 (assistant will enter this)
+    printf("Enter the ward number of %d wards which are empty(Ward 0,1,2,3):\n",n); // ward 1,2,3 or 4 (assistant will enter this)
     for(i = 0; i<n; i++)
     {
         scanf("%d",&ward_no[i]);
         q[i] = delete(ward_no[i]);
     }
+    if(n!=0)
+    {
     printf("\n");
     printf("|----------------------------------|\n");
     printf("|  Patient No.   |Ward No. allotted|\n");
@@ -70,7 +73,11 @@ void ward_allotment(int queue_array[MAX])
     printf("|       %d        |          %d      |\n",q[i],ward_no[i]);
     printf("|----------------------------------|\n");
     printf("\n\n");
-    printf("waiting queue of patients:\n");    //according to priority (later we can map patient id by using structure)
+    }
+   
+    if(front<=rear)
+    {
+    printf("waiting queue of patients:\n");    
     printf("  Patient Id\n");
     for(i = front; i<=rear; i++)
     {
@@ -78,6 +85,10 @@ void ward_allotment(int queue_array[MAX])
     printf("|     %d     |\n", queue_array[i]);
     }
     printf("|-----------|\n");
+    
+    sleep(6);
+    goto label;
+    }
     
 }
 
@@ -212,6 +223,8 @@ int main()
     
      
     ward_allotment(queue_array);
+    printf("\nNo more Patients\n");
+    printf("-----THANK YOU------");
      
  }
 
